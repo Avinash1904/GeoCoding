@@ -40,11 +40,12 @@ class Service:
     def get_lat_lang(self,address):
         """ Actual function to handle lat-lang values         
         """
+        address = address.replace(' ','+')
         params = {}
         params['address'] = address
         params['key'] = KEY
         data = requests.get(GEO_CODING_URL,params=params)
-        if data.status_code == 200:
+        if data.status_code == 200 and data['status'] == 'OK':
             lat = data['results'][0]['geometry']['location']['lat']
             lng = data['results'][0]['geometry']['location']['lat']
             return lat,lng
