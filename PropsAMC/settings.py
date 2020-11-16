@@ -123,4 +123,4 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 GEO_CODING_URL = 'https://maps.googleapis.com/maps/api/geocode/json'
-KEY  = os.environ.get('JOB_SWITCH_KEY') # account key
+KEY  = os.environ.get('GEO_CODING_API_KEY') # account key

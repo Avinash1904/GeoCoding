@@ -34,7 +34,7 @@ class Service:
         df[1] = latitudes
         df[2] = longitudes
         df.columns  = ['Address','latitude','longitude']
-        df.to_excel(file_loc)
+        df.to_excel(file_loc,index=False)
         return True
 
     def get_lat_lang(self,address):
@@ -44,8 +44,9 @@ class Service:
         params = {}
         params['address'] = address
         params['key'] = KEY
-        data = requests.get(GEO_CODING_URL,params=params)
-        if data.status_code == 200 and data['status'] == 'OK':
+        response_data = requests.get(GEO_CODING_URL,params=params)
+        data = response_data.json()
+        if response_data.status_code == 200 and data['status'] == 'OK':
             lat = data['results'][0]['geometry']['location']['lat']
             lng = data['results'][0]['geometry']['location']['lat']
             return lat,lng

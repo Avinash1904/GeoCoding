@@ -6,10 +6,19 @@
     <title>Document</title>
 </head>
 <body>
+    {% if is_download_url %}
+    <a href="{{ instance.address.url }}" >Download your file</a>
+    {% else %}
+    {% if error != None %}
+    <p>{{ error }}</p>
+    {% endif %}
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Upload</button>
       </form>
+    {% endif %}
+
+
 </body>
 </html>
